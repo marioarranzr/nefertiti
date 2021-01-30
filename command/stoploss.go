@@ -29,10 +29,15 @@ func (c *StopLossCommand) Run(args []string) int {
 	}
 
 	flg = flag.Get("exchange")
+	exchangeName := ""
 	if flg.Exists == false {
-		return c.ReturnError(errors.New("missing argument: exchange"))
+		exchangeName = defaultExchange
+		// 	return c.ReturnError(errors.New("missing argument: exchange"))
 	}
-	exchange := exchanges.New().FindByName(flg.String())
+	if exchangeName == "" {
+		exchangeName = flg.String()
+	}
+	exchange := exchanges.New().FindByName(exchangeName)
 	if exchange == nil {
 		return c.ReturnError(fmt.Errorf("exchange %v does not exist", flg))
 	}
@@ -107,7 +112,7 @@ Usage: ./cryptotrader stoploss [options]
 The stoploss command places a stop-loss order with the specified exchange.
 
 Options:
-  --exchange = name
+  --exchange = name, for example: Binance (optional, by default Binance)
   --type     = [limit|market]
   --market   = a valid market pair
   --size     = amount of cryptocurrency to sell

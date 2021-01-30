@@ -9,6 +9,8 @@ import (
 	"github.com/marioarranzr/nefertiti/passphrase"
 )
 
+const Binance_ = "Binance"
+
 type Exchanges []model.Exchange
 
 func (exchanges *Exchanges) FindByName(name string) model.Exchange {

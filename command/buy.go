@@ -563,10 +563,15 @@ func (c *BuyCommand) Run(args []string) int {
 	}
 
 	flg = flag.Get("exchange")
+	exchangeName := ""
 	if flg.Exists == false {
-		return c.ReturnError(errors.New("missing argument: exchange"))
+		exchangeName = defaultExchange
+		// 	return c.ReturnError(errors.New("missing argument: exchange"))
 	}
-	exchange := exchanges.New().FindByName(flg.String())
+	if exchangeName == "" {
+		exchangeName = flg.String()
+	}
+	exchange := exchanges.New().FindByName(exchangeName)
 	if exchange == nil {
 		return c.ReturnError(errors.Errorf("exchange %v does not exist", flg))
 	}
@@ -811,7 +816,7 @@ Usage: ./cryptotrader buy [options]
 The buy command opens new limit buy orders on the specified exchange/market.
 
 Options:
-  --exchange = name, for example: Bittrex
+  --exchange = name, for example: Binance (optional, by default Binance)
   --market   = a valid market pair
   --size     = amount of cryptocurrency to buy per order
   --agg      = aggregate public order book to nearest multiple of agg (optional)
@@ -830,7 +835,7 @@ Alternative Strategy:
   alternative to the built-in strategy. Please refer to the below options.
 
 Alternative Strategy Options:
-  --exchange = name, for example: Bittrex
+  --exchange = name, for example: Binance (optional, by default Binance)
   --signals  = provider, for example: MiningHamster 
   --price    = price (in quote currency) that you will want to pay for an order
   --quote    = currency that is used as the reference, for example: BTC or USDT

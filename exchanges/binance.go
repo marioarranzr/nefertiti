@@ -255,7 +255,7 @@ func (self *Binance) GetClient(private, sandbox bool) (interface{}, error) {
 		return exchange.NewClient("", "", self.futures()), nil
 	}
 
-	apiKey, apiSecret, err := promptForApiKeys("Binance")
+	apiKey, apiSecret, err := promptForApiKeys(Binance_)
 	if err != nil {
 		return nil, err
 	}
@@ -598,7 +598,7 @@ func (self *Binance) Sell(
 		apiKey    string
 		apiSecret string
 	)
-	if apiKey, apiSecret, err = promptForApiKeys("Binance"); err != nil {
+	if apiKey, apiSecret, err = promptForApiKeys(Binance_); err != nil {
 		return err
 	}
 
@@ -1396,7 +1396,7 @@ func NewBinance() model.Exchange {
 	return &Binance{
 		ExchangeInfo: &model.ExchangeInfo{
 			Code: "BINA",
-			Name: "Binance",
+			Name: Binance_,
 			URL:  "https://www.binance.com/",
 			REST: model.Endpoint{
 				URI: "https://api.binance.com",

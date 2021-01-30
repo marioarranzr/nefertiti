@@ -31,10 +31,15 @@ func (c *BookCommand) Run(args []string) int {
 	}
 
 	flg = flag.Get("exchange")
+	exchangeName := ""
 	if flg.Exists == false {
-		return c.ReturnError(errors.New("missing argument: exchange"))
+		exchangeName = defaultExchange
+		// 	return c.ReturnError(errors.New("missing argument: exchange"))
 	}
-	exchange := exchanges.New().FindByName(flg.String())
+	if exchangeName == "" {
+		exchangeName = flg.String()
+	}
+	exchange := exchanges.New().FindByName(exchangeName)
 	if exchange == nil {
 		return c.ReturnError(fmt.Errorf("exchange %v does not exist", flg))
 	}
@@ -108,7 +113,7 @@ Usage: ./cryptotrader book [options]
 The book command returns a list of all public orders on a market.
 
 Options:
-  --exchange = name
+  --exchange = name, for example: Binance (optional, by default Binance)
   --market   = a valid market pair
   --side     = [bids|asks] (optional, defaults to bids)
   --agg      = aggregate the book to nearest multiple of agg
