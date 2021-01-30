@@ -3,10 +3,10 @@ package exchanges
 import (
 	"strings"
 
-	"github.com/svanas/nefertiti/flag"
-	"github.com/svanas/nefertiti/model"
-	"github.com/svanas/nefertiti/passphrase"
 	"github.com/go-errors/errors"
+	"github.com/marioarranzr/nefertiti/flag"
+	"github.com/marioarranzr/nefertiti/model"
+	"github.com/marioarranzr/nefertiti/passphrase"
 )
 
 type Exchanges []model.Exchange
@@ -22,14 +22,7 @@ func (exchanges *Exchanges) FindByName(name string) model.Exchange {
 
 func New() *Exchanges {
 	var out Exchanges
-	out = append(out, NewGdax())
-	out = append(out, NewBittrex())
-	out = append(out, NewBitstamp())
-	out = append(out, NewCexIo())
 	out = append(out, NewBinance())
-	out = append(out, NewHitBTC())
-	out = append(out, NewKucoin())
-	out = append(out, NewCryptoDotCom())
 	return &out
 }
 

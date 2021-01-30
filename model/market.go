@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/svanas/nefertiti/pricing"
+	"github.com/marioarranzr/nefertiti/pricing"
 )
 
 type Market struct {

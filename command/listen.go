@@ -14,8 +14,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/svanas/nefertiti/flag"
 	"github.com/gorilla/mux"
+	"github.com/marioarranzr/nefertiti/flag"
 )
 
 type (

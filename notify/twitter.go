@@ -1,11 +1,11 @@
 package notify
 
 import (
-	"github.com/svanas/nefertiti/flag"
-	"github.com/svanas/nefertiti/passphrase"
 	"github.com/dghubble/go-twitter/twitter"
 	"github.com/dghubble/oauth1"
 	"github.com/go-errors/errors"
+	"github.com/marioarranzr/nefertiti/flag"
+	"github.com/marioarranzr/nefertiti/passphrase"
 )
 
 type TwitterKeys struct {

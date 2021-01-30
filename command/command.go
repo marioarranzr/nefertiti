@@ -4,14 +4,13 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
-	"runtime"
 	"strconv"
 	"strings"
 
-	"github.com/svanas/nefertiti/flag"
+	"github.com/marioarranzr/nefertiti/flag"
 )
 
-type CommandCallBack func(pc uintptr, file string, line int, err error)
+type CommandCallBack func(err error)
 
 type CommandMeta struct {
 	Port       *int64
@@ -21,11 +20,10 @@ type CommandMeta struct {
 }
 
 func (cm *CommandMeta) ReturnError(err error) int {
-	pc, file, line, _ := runtime.Caller(1)
 	// step #1: execute the callback function (passing the error back to main)
 	var cb CommandCallBack
 	cb = *cm.CallBack
-	cb(pc, file, line, err)
+	cb(err)
 	// step #2: return 1 as an error code
 	return 1
 }

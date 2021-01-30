@@ -10,10 +10,10 @@ import (
 
 	"github.com/go-errors/errors"
 	"github.com/gorilla/mux"
+	"github.com/marioarranzr/nefertiti/command"
+	ctcommand "github.com/marioarranzr/nefertiti/command"
+	"github.com/marioarranzr/nefertiti/flag"
 	"github.com/mitchellh/cli"
-	"github.com/svanas/nefertiti/command"
-	ctcommand "github.com/svanas/nefertiti/command"
-	"github.com/svanas/nefertiti/flag"
 )
 
 const (
@@ -28,18 +28,12 @@ var (
 
 func main() {
 	var (
-		err  error
-		cnt  uintptr
-		file string
-		line int
+		err error
 	)
 
 	var cb ctcommand.CommandCallBack
-	cb = func(pc uintptr, fn string, ln int, e error) {
+	cb = func(e error) {
 		err = e
-		cnt = pc
-		file = fn
-		line = ln
 	}
 
 	cm := ctcommand.CommandMeta{
@@ -142,12 +136,11 @@ func main() {
 	code, _ := console.Run()
 
 	if err != nil {
-		prefix := errors.FormatCaller(cnt, file, line)
 		_, ok := err.(*errors.Error)
 		if ok {
-			log.Printf("[ERROR] %s", err.(*errors.Error).ErrorStack(prefix, ""))
+			log.Printf("[ERROR] %s", err.(*errors.Error).ErrorStack())
 		} else {
-			log.Printf("[ERROR] %s", fmt.Sprintf("%s %v", prefix, err))
+			log.Printf("[ERROR] %s", fmt.Sprintf("%v", err))
 		}
 		if code != 0 {
 			os.Exit(code)

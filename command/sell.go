@@ -8,11 +8,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/svanas/nefertiti/exchanges"
-	"github.com/svanas/nefertiti/flag"
-	"github.com/svanas/nefertiti/model"
-	"github.com/svanas/nefertiti/notify"
-	"github.com/svanas/nefertiti/pricing"
+	"github.com/marioarranzr/nefertiti/exchanges"
+	"github.com/marioarranzr/nefertiti/flag"
+	"github.com/marioarranzr/nefertiti/model"
+	"github.com/marioarranzr/nefertiti/notify"
+	"github.com/marioarranzr/nefertiti/pricing"
 )
 
 type (

@@ -3,7 +3,7 @@ package signals
 import (
 	"strings"
 
-	"github.com/svanas/nefertiti/model"
+	"github.com/marioarranzr/nefertiti/model"
 )
 
 type Signals []model.Channel

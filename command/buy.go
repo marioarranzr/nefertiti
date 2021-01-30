@@ -5,18 +5,17 @@ import (
 	"fmt"
 	"log"
 	"math"
-	"runtime"
 	"sort"
 	"strings"
 	"time"
 
-	"github.com/svanas/nefertiti/exchanges"
-	"github.com/svanas/nefertiti/flag"
-	"github.com/svanas/nefertiti/model"
-	"github.com/svanas/nefertiti/notify"
-	"github.com/svanas/nefertiti/pricing"
-	"github.com/svanas/nefertiti/signals"
 	"github.com/go-errors/errors"
+	"github.com/marioarranzr/nefertiti/exchanges"
+	"github.com/marioarranzr/nefertiti/flag"
+	"github.com/marioarranzr/nefertiti/model"
+	"github.com/marioarranzr/nefertiti/notify"
+	"github.com/marioarranzr/nefertiti/pricing"
+	"github.com/marioarranzr/nefertiti/signals"
 )
 
 type (
@@ -31,9 +30,6 @@ func report(err error,
 	service model.Notify,
 	exchange model.Exchange,
 ) {
-	pc, file, line, _ := runtime.Caller(1)
-	prefix := errors.FormatCaller(pc, file, line)
-
 	var suffix string
 	if market != "" {
 		suffix = fmt.Sprintf("%s Market: %v.", suffix, market)
@@ -42,10 +38,10 @@ func report(err error,
 		suffix = fmt.Sprintf("%s Channel: %s.", suffix, channel.GetName())
 	}
 
-	msg := fmt.Sprintf("%s %v%s", prefix, err, suffix)
+	msg := fmt.Sprintf("%v%s", err, suffix)
 	_, ok := err.(*errors.Error)
 	if ok {
-		log.Printf("[ERROR] %s", err.(*errors.Error).ErrorStack(prefix, suffix))
+		log.Printf("[ERROR] %s", err.(*errors.Error).ErrorStack())
 	} else {
 		log.Printf("[ERROR] %s", msg)
 	}

@@ -1,8 +1,8 @@
 package model
 
 import (
-	"github.com/svanas/nefertiti/pricing"
 	"github.com/go-errors/errors"
+	"github.com/marioarranzr/nefertiti/pricing"
 )
 
 var (

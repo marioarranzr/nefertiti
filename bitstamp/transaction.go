@@ -5,8 +5,8 @@ import (
 	"math"
 	"time"
 
-	"github.com/svanas/nefertiti/empty"
 	"github.com/go-errors/errors"
+	"github.com/marioarranzr/nefertiti/empty"
 )
 
 type (

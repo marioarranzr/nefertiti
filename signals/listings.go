@@ -4,7 +4,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/svanas/nefertiti/model"
+	"github.com/marioarranzr/nefertiti/model"
 )
 
 type Listing struct {

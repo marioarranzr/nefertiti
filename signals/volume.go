@@ -6,9 +6,9 @@ import (
 	"sort"
 	"time"
 
-	"github.com/svanas/nefertiti/ethplorer"
-	"github.com/svanas/nefertiti/flag"
-	"github.com/svanas/nefertiti/model"
+	"github.com/marioarranzr/nefertiti/ethplorer"
+	"github.com/marioarranzr/nefertiti/flag"
+	"github.com/marioarranzr/nefertiti/model"
 )
 
 type signal struct {

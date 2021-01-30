@@ -3,7 +3,7 @@ package ethplorer
 import (
 	"strconv"
 
-	"github.com/svanas/nefertiti/empty"
+	"github.com/marioarranzr/nefertiti/empty"
 )
 
 type (

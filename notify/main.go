@@ -1,7 +1,7 @@
 package notify
 
 import (
-	"github.com/svanas/nefertiti/model"
+	"github.com/marioarranzr/nefertiti/model"
 )
 
 type Services []model.Notify

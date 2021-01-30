@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"github.com/go-errors/errors"
-	"github.com/svanas/nefertiti/pricing"
+	"github.com/marioarranzr/nefertiti/pricing"
 )
 
 type Market struct {

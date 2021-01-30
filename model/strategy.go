@@ -1,8 +1,8 @@
 package model
 
 import (
-	"github.com/svanas/nefertiti/flag"
-	"github.com/svanas/nefertiti/pricing"
+	"github.com/marioarranzr/nefertiti/flag"
+	"github.com/marioarranzr/nefertiti/pricing"
 )
 
 type Strategy int

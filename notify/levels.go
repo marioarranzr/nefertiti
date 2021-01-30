@@ -1,7 +1,7 @@
 package notify
 
 import (
-	"github.com/svanas/nefertiti/flag"
+	"github.com/marioarranzr/nefertiti/flag"
 )
 
 const (

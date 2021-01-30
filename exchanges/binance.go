@@ -6,19 +6,18 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"runtime"
 	"strconv"
 	"strings"
 	"time"
 
-	"github.com/svanas/nefertiti/flag"
-	"github.com/svanas/nefertiti/model"
-	"github.com/svanas/nefertiti/notify"
-	"github.com/svanas/nefertiti/pricing"
-	"github.com/svanas/nefertiti/session"
-	"github.com/svanas/nefertiti/uuid"
 	filemutex "github.com/alexflint/go-filemutex"
 	"github.com/go-errors/errors"
+	"github.com/marioarranzr/nefertiti/flag"
+	"github.com/marioarranzr/nefertiti/model"
+	"github.com/marioarranzr/nefertiti/notify"
+	"github.com/marioarranzr/nefertiti/pricing"
+	"github.com/marioarranzr/nefertiti/session"
+	"github.com/marioarranzr/nefertiti/uuid"
 	exchange "github.com/svanas/go-binance"
 )
 
@@ -211,20 +210,14 @@ func (self *Binance) getBrokerId() string {
 }
 
 func (self *Binance) report(err error) {
-	pc, file, line, _ := runtime.Caller(1)
-	log.Printf("[ERROR] %s %v",
-		errors.FormatCaller(pc, file, line), err,
-	)
+	log.Printf("[ERROR] %v", err)
 }
 
 func (self *Binance) notify(err error, level int64, service model.Notify) {
-	pc, file, line, _ := runtime.Caller(1)
-	prefix := errors.FormatCaller(pc, file, line)
-
-	msg := fmt.Sprintf("%s %v", prefix, err)
+	msg := fmt.Sprintf("%v", err)
 	_, ok := err.(*errors.Error)
 	if ok {
-		log.Printf("[ERROR] %s", err.(*errors.Error).ErrorStack(prefix, ""))
+		log.Printf("[ERROR] %s", err.(*errors.Error).ErrorStack())
 	} else {
 		log.Printf("[ERROR] %s", msg)
 	}
@@ -430,7 +423,7 @@ func (self *Binance) sell(
 								}
 							}
 							if err != nil {
-								return new, errors.Append(err, "\t", string(data))
+								return new, errors.Errorf("%v %v %v", err, "\t", string(data))
 							}
 						}
 					}
@@ -583,7 +576,7 @@ func (self *Binance) sell(
 						}
 					}
 					if err != nil {
-						return new, errors.Append(err, "\t", string(data))
+						return new, errors.Errorf("%v %v %v", err, "\t", string(data))
 					}
 				}
 			}
@@ -766,7 +759,7 @@ func (self *Binance) Sell(
 								if data, _ = binanceOrderToString(order); data == nil {
 									self.notify(err, level, service)
 								} else {
-									self.notify(errors.Append(err, "\t", string(data)), level, service)
+									self.notify(errors.Errorf("%v %v %v", err, "\t", string(data)), level, service)
 								}
 							}
 
@@ -829,7 +822,7 @@ func (self *Binance) Sell(
 												if data, _ = binanceOrderToString(order); data == nil {
 													self.notify(err, level, service)
 												} else {
-													self.notify(errors.Append(err, "\t", string(data)), level, service)
+													self.notify(errors.Errorf("%v %v %v", err, "\t", string(data)), level, service)
 												}
 											}
 										}

@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/svanas/nefertiti/exchanges"
-	"github.com/svanas/nefertiti/flag"
+	"github.com/marioarranzr/nefertiti/exchanges"
+	"github.com/marioarranzr/nefertiti/flag"
 )
 
 type (
