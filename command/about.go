@@ -25,7 +25,7 @@ VERSION:
   %s
 
 AUTHOR:
-  Stefan van As <svanas@runbox.com>
+  Mario Arranz <hello@marioarranz.com>
 
 GLOBAL OPTIONS:
   --help     show help

@@ -400,7 +400,6 @@ func buySignals(
 		return old, err
 	}
 
-	// --- BEGIN --- svanas 2018-12-06 --- allow for signals to buy new listings ---
 	for _, market := range markets {
 		if model.HasMarket(all, market) == false {
 			if all, err = exchange.GetMarkets(false, sandbox); err != nil {
@@ -409,7 +408,6 @@ func buySignals(
 			break
 		}
 	}
-	// ---- END ---- svanas 2018-12-06 ---------------------------------------------
 
 	for _, market := range markets {
 		if model.HasMarket(all, market) {

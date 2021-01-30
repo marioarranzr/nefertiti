@@ -469,7 +469,6 @@ func (self *Binance) sell(
 							os.Remove(temp)
 						}()
 					}
-					// --- BEGIN --- svanas 2018-05-10 --- <APIError> code=-1013, msg=Invalid price.
 					bought := order.GetPrice()
 					if bought == 0 {
 						if call != nil {
@@ -481,7 +480,6 @@ func (self *Binance) sell(
 							}
 						}
 					}
-					// ---- END ---- svanas 2018-05-10 ---------------------------------------------
 					var (
 						base  string
 						quote string
@@ -798,7 +796,6 @@ func (self *Binance) Sell(
 															model.MARKET,
 															model.ParseMetaData(order.ClientOrderId).String(),
 														)
-														// --- BEGIN --- svanas 2018-12-01 --- reopen the above limit sell on an API error ---
 														if err != nil {
 															_, ok := err.(*exchange.BinanceError)
 															if ok {
@@ -813,7 +810,6 @@ func (self *Binance) Sell(
 																)
 															}
 														}
-														// ---- END ---- svanas 2018-12-01 ---------------------------------------------------
 													}
 												}
 											}
@@ -925,7 +921,6 @@ func (self *Binance) StopLoss(client interface{}, market string, size float64, p
 
 	var order *exchange.CreateOrderResponse
 	if order, err = service.Do(context.Background()); err != nil {
-		// --- BEGIN --- svanas 2019-02-07 ------------------------------------
 		_, ok := err.(*exchange.BinanceError)
 		if ok {
 			self.report(err)
@@ -960,7 +955,6 @@ func (self *Binance) StopLoss(client interface{}, market string, size float64, p
 				}
 			}
 		}
-		// ---- END ---- svanas 2019-02-07 ------------------------------------
 		return nil, errors.Wrap(err, 1)
 	}
 
@@ -1325,7 +1319,6 @@ func (self *Binance) Buy(client interface{}, cancel bool, market string, calls m
 	// step 2: open the top X buy orders
 	for _, call := range calls {
 		if !call.Skip {
-			// --- BEGIN --- svanas 2018-11-30 --- <APIError> code=-1013, msg=Filter failure: MIN_NOTIONAL.
 			var (
 				oid   []byte
 				min   float64
@@ -1349,7 +1342,6 @@ func (self *Binance) Buy(client interface{}, cancel bool, market string, calls m
 					qty = pricing.CeilToPrecision((min / limit), prec)
 				}
 			}
-			// ---- END ---- svanas 2018-11-30 ------------------------------------------------------------
 			if deviation > 1.0 && kind == model.LIMIT {
 				var prec int
 				if prec, err = self.GetPricePrec(client, market); err == nil {
